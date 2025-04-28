@@ -18,9 +18,6 @@ const path = require('path');
 
 app.use(bodyparser.json());
 
-app.use('/',(req,res)=>{
-    res.send("<h1>welcome to vasista");
-})
 
 
 app.use('/vendor',vendorRoutes);
@@ -31,3 +28,8 @@ app.use('/uploads',express.static('uploads'));
 app.listen(PORT,()=>{
     console.log(`server started and running successfully at ${PORT}`);
 });
+
+
+app.use('/',(req,res)=>{
+    res.send("<h1>welcome to vasista");
+})
