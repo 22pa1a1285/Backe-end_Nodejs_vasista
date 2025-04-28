@@ -4,7 +4,7 @@ const express = require("express");
 
 const mongoose = require("mongoose");
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 mongoose.connect(process.env.MONGO_URL)
 .then(()=>console.log("mongodb connected successfully"))
@@ -18,7 +18,7 @@ const path = require('path');
 
 app.use(bodyparser.json());
 
-app.use('/home',(req,res)=>{
+app.use('/',(req,res)=>{
     res.send("<h1>welcome to vasista");
 })
 
