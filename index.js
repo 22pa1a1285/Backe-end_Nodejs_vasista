@@ -1,8 +1,5 @@
 const express = require("express");
-<<<<<<< HEAD
 const cors = require("cors");
-=======
->>>>>>> 454807f4019f92035f81c34c8a47087108f78653
 const dotEnv = require("dotenv");
 dotEnv.config(); 
 
