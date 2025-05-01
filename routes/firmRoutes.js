@@ -1,16 +1,24 @@
 const express = require("express");
 const firmController = require("../controllers/firmController");
-const verifyToken = require('../middlewares/verifyToken')
+const verifyToken = require('../middlewares/verifyToken');
 
-const router = express.Router()
+const router = express.Router();
 
-router.post('/add-firm',verifyToken,firmController.addFirm);
+// FIXED: include multer upload middleware
+router.post(
+  '/add-firm',
+  verifyToken,
+  firmController.upload.single('image'), // this processes form-data and populates req.body and req.file
+  firmController.addFirm
+);
 
-router.get('/uploads/:imageName',(req,res)=>{
+const path = require('path');
+router.get('/uploads/:imageName', (req, res) => {
     const imageName = req.params.imageName;
-    res.headersSent('Content-Type','image/jpeg');
-    res.sendFile(Path2D.join(__dirname,'..','uploads',imageName));
+    res.setHeader('Content-Type', 'image/jpeg'); // FIXED: was incorrect
+    res.sendFile(path.join(__dirname, '..', 'uploads', imageName));
 });
 
-router.delete('/:firmId',firmController.deleteFirmById);
+router.delete('/:firmId', firmController.deleteFirmById);
+
 module.exports = router;
